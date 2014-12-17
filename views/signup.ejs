@@ -1,0 +1,16 @@
+<% include /header %>
+
+<div class="col-md-offset-4 col-md-4">
+<% include alerts %>
+    <form class="form" method="post" action="/signup">
+        <input type="text" class="form-control" id="signup-name" placeholder="Name" name="name">
+        <input type="text" class="form-control" id="signup-email" placeholder="Email" name="email">
+        <input type="password" class="form-control" id="signup-password" placeholder="Password" name="password">
+        <br>
+        <input type="submit" value="Sign up" style="width: 100%;" class="btn btn-primary center-block">
+    </form>
+</div>
+
+
+
+<% include /footer %>

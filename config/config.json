@@ -5,7 +5,7 @@
     "dialect": "postgres"
   },
   "test": {
-    "database": "database_test",
+    "database": "dominiongirl",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },

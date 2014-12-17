@@ -1,0 +1,13 @@
+<% include /header %>
+
+<div class="col-md-offset-4 col-md-4">
+<% include alerts %>
+    <form class="form" method="post" action="/login">
+        <input type="text" class="form-control" id="login-email" placeholder="Email" name="email">
+        <input type="password" class="form-control" id="login-password" placeholder="Password" name="password">
+        <br>
+        <input type="submit" value="Log in" style="width: 100%;" class="btn btn-primary center-block">
+    </form>
+</div>
+
+<% include /footer %>

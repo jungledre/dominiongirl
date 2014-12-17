@@ -1,0 +1,26 @@
+<% include /header %>
+
+<h2>Choose Expansions</h2>
+<div class="deckchoices input-group">
+    <form name="input" action="/" method="POST">
+        <select class="chzn-select form-control" name="deckchoice" multiple>
+            <optgroup label="Base Sets" data-max-options="1">
+                <option value=""></option>
+                <option value="Dominion">Dominion</option>
+                <option value="Intrigue">Intrigue</option>
+            </optgroup>
+            <optgroup label="Expansions">
+                <option value="Seaside">Seaside</option>
+                <option value="Alchemy">Alchemy</option>
+                <option value="Prosperity">Prosperity</option>
+                <option value="Cornucopia">Cornucopia</option>
+                <option value="Hinterlands">Hinterlands</option>
+                <option value="Darkages">Darkages</option>
+<!--                 <option value="Guilds">Guilds</option>
+ -->            </optgroup>
+            <input type="submit" class="btn btn-default" value="Submit">
+        </select>
+    </form>
+</div>
+
+<% include /footer %>

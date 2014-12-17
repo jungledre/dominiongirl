@@ -1,0 +1,15 @@
+<% include /header %>
+
+<div class="container container-fluid">
+    <div class="row">
+    <% for (var i = 0; i < 18; i++) { %>
+        <% if (data.length != 0) {%>
+            <div>
+                <img src="<%= data[i].images.standard_resolution.url %>" id='igPhotos' class="col-md-4">
+            </div>
+        <% } %>
+        <% } %>
+        </div>
+ </div>
+
+<% include /footer %>
