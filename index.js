@@ -54,7 +54,7 @@ Instagram.set('client_secret', process.env.client_secret);
 
 // HOME
 app.get('/', function(req, res, next){
-    res.render('home', {deckchoice : _.sample(req.session.settings.deckchoice,10)});
+    res.render('home', {deckchoice : ch.sortAlpha(ch.shuffle(req.session.settings.deckchoice,10))});
 });
 
 // CUSTOMIZE
