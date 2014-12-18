@@ -9,7 +9,7 @@ body{
 */}
 
 body:before {
-    background: linear-gradient(rgba(37, 37, 37, 0), rgba(37, 37, 37, .5));
+    background: linear-gradient(rgba(37, 37, 37, 0), rgba(37, 37, 37, 1));
     background-size: cover;
     top: 0;
     left: 0;
