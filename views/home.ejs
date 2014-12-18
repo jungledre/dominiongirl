@@ -1,5 +1,8 @@
 <% include /header %>
-
+<div class="page-header col-md-12 col-centered text-center">
+    <a href="/"><button type="button" class="btn btn-default" href="#">Shuffle</button></a>
+    <a href="/settings"><button type="button" class="btn btn-default" href="#">Settings</button></a>
+</div>
 <div class="row">
     <% for (var i = 0; i < deckchoice.length; i++) { %>
         <% if (deckchoice.length != 0) {%>
@@ -12,4 +15,3 @@
 
 
 
-<% include /footer %>
