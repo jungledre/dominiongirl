@@ -27,8 +27,5 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 
-# Card Images
-*.jpg
-
 # env
 .env
