@@ -1,16 +1,16 @@
 <% include /header %>
+
+
 <div class="page-header col-md-12 col-centered text-center">
-    <a href="/"><button type="button" class="btn btn-default" href="#">Shuffle</button></a>
+    <a href="/"><button type="button" class="btn btn-default" name="shuffle" href="#">Shuffle</button></a>
     <a href="/settings"><button type="button" class="btn btn-default" href="#">Settings</button></a>
 </div>
-<div class="row">
+<div class="row" id="allCards">
     <% for (var i = 0; i < deckchoice.length; i++) { %>
         <% if (deckchoice.length != 0) {%>
-            <img src="/card_images/<%= deckchoice[i].name.replace(/ /g,'').replace(/'/g,'').replace(/-/g,'').toLowerCase() %>.jpg" class="col-md-2" id="card-display">
+            <img src="/card_images/<%= deckchoice[i].name.replace(/ /g,'').replace(/'/g,'').replace(/-/g,'').toLowerCase() %>.jpg" class="flipInX animated col-md-2" id="card-display">
         <% } %>
     <% } %>
-</div>
-    <div class="row"></div>
 </div>
 
 

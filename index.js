@@ -28,6 +28,15 @@ app.use(function(req, res, next){
     req.getUser = function(){
         return req.session.user || false;
     }
+
+    if(!req.session.settings) {
+        req.session.settings={};
+    }
+
+    if(!req.session.settings.deckchoice){
+        req.session.settings.deckchoice = deckData.Dominion;
+    }
+
     next();
 })
 
@@ -36,6 +45,7 @@ app.use(flash());
 app.get('*',function(req,res,next){
     var alerts = req.flash();
     res.locals.alerts = alerts;
+    res.locals.currentUser = req.getUser();
     next();
 })
 
@@ -44,7 +54,7 @@ Instagram.set('client_secret', process.env.client_secret);
 
 // HOME
 app.get('/', function(req, res, next){
-    res.render('home', {deckchoice : _.sample(deckData.Dominion ,10)});
+    res.render('home', {deckchoice : _.sample(req.session.settings.deckchoice,10)});
 });
 
 // CUSTOMIZE
@@ -53,7 +63,8 @@ app.get('/settings', function(req, res, next){
 })
 
 app.post('/', function(req, res, next){
-    res.render('home', {deckchoice : ch.sortAlpha(ch.shuffle(ch.getDecks(req.body.deckchoice)))});
+    req.session.settings.deckchoice = ch.sortAlpha(ch.getDecks(req.body.deckchoice));
+    res.redirect('/');
     // res.send({deckchoice : ch.sortAlpha(ch.shuffle(ch.getDecks(req.body.deckchoice)))})
 })
 
@@ -102,12 +113,12 @@ app.get('/signup',function(req,res){
 });
 
 app.post('/signup',function(req,res){
-    var currentUser = {
+    var user = {
         where: {email:req.body.email},
         defaults:{email:req.body.email, password:req.body.password, name:req.body.name }
     }
-    db.user.findOrCreate(currentUser).spread(function(data, created){
-        res.redirect('/');
+    db.user.findOrCreate(user).spread(function(data, created){
+        res.redirect('/login');
     }).
     catch(function(error){
         if(error && error.errors && Array(error.errors)){
@@ -117,11 +128,11 @@ app.post('/signup',function(req,res){
         } else {
             req.flash('danger', 'Something weird happened.')
         }
-        res.redirect('/login')
+        res.redirect('/signup')
     });
 });
 
-
+//LOGOUT
 app.get('/logout',function(req,res){
     delete req.session.user;
     req.flash('info', 'You have been logged out.')
