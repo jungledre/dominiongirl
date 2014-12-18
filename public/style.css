@@ -31,8 +31,6 @@ h2 {
     padding: 10px !important;
 }
 
-
-
 #igPhotos {
     padding: 0px;
     box-shadow: 0px 0px 0px #000;
@@ -59,4 +57,6 @@ h2 {
     width: 98% !important;
     min-height: 35px !important;
     border-radius: 5px;
+    padding-top:8px !important;
 }
+
