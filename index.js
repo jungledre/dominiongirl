@@ -65,9 +65,21 @@ app.get('/settings', function(req, res, next){
 app.post('/', function(req, res, next){
     req.session.settings.deckchoice = ch.sortAlpha(ch.getDecks(req.body.deckchoice));
     res.redirect('/');
-    // res.send({deckchoice : ch.sortAlpha(ch.shuffle(ch.getDecks(req.body.deckchoice)))})
 })
 
+// WISHLIST
+app.route('/wishlist')
+.get(function(req, res){
+    db.feature.findAll({order: 'id DESC'}).done(function(err, feature) {
+        res.render('wishlist', {feature: feature});
+    });
+})
+.post(function(req, res){
+    db.feature.create({text: req.body.text})
+    .then(function(theText){
+        res.redirect('/wishlist')
+    });
+});
 
 // INSTAGRAM
 app.get('/photos', function(req,res) {
@@ -80,11 +92,11 @@ app.get('/photos', function(req,res) {
 });
 
 // LOGIN FORM
-app.get('/login',function(req,res){
+app.route('/login')
+.get(function(req,res){
     res.render('login');
-});
-
-app.post('/login',function(req,res){
+})
+.post(function(req,res){
     db.user.find({where: {email:req.body.email}}).then(function(userObj){
         if(userObj){
             bcrypt.compare(req.body.password, userObj.password, function(err, match){
@@ -108,11 +120,11 @@ app.post('/login',function(req,res){
 });
 
 // SIGNUP FORM
-app.get('/signup',function(req,res){
+app.route('/signup')
+.get(function(req,res){
     res.render('signup');
-});
-
-app.post('/signup',function(req,res){
+})
+.post(function(req,res){
     var user = {
         where: {email:req.body.email},
         defaults:{email:req.body.email, password:req.body.password, name:req.body.name }

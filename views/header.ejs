@@ -2,15 +2,13 @@
 <head>
     <title>Dominion Girl (☝ ◉ืൠ◉ื)</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="/animate.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <link id="replaceMissingFavicon" rel="icon" href="http://www.gravatar.com/avatar/764aeaaa99a06398bb7d80367408083b?s=16&amp;d=identicon" data-debug="http://dominiongirl.herokuapp.com/">
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/chosen/1.1.0/chosen.min.css">
     <link rel="stylesheet" type="text/css" href="/style.css">
     <link href='https://fonts.googleapis.com/css?family=UnifrakturCook:700' rel='stylesheet' type='text/css'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/chosen.jquery.min.js"></script>
     <script src="/script.js"></script>
     <script type="text/javascript">
@@ -27,13 +25,7 @@
             <li class="active"><a href="/">Home</a></li>
             <li><a href="/settings">Settings</a></li>
             <li><a href="/photos">Beedogs</a></li>
-        <% if(currentUser) { %>
-            <li><a href="#">Hello, <%= currentUser.name %></a></li>
-            <li><a href="/logout" class="navbar-right">Logout</a></li>
-        <% } else { %>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/signup">Signup</a></li>
-        <% } %>
+            <li><a href="/wishlist">Feature Wishlist</a></li>
         </ol>
     </div>
 </nav>

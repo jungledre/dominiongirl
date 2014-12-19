@@ -1,14 +1,14 @@
-body,html{
+body,html {
     height: 100%;
     min-height: 100%;
 }
 
-body{
+body {
     background: url("background-images/dark_fish_skin.png");
 /*    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 */}
 
-body:before {
+/*body:before {
     background: linear-gradient(rgba(37, 37, 37, 0), rgba(37, 37, 37, 1));
     background-size: cover;
     top: 0;
@@ -20,7 +20,7 @@ body:before {
     content: " ";
     position: fixed;
 }
-
+*/
 h2 {
     color: white !important;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif !important;
@@ -42,7 +42,7 @@ h2 {
     text-shadow: -4px 5px 5px #141414;
 }
 
-.page-header h1 small{
+.page-header h1 small {
     color: white;
     font-size: 18pt;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -67,20 +67,20 @@ h2 {
     box-shadow: -4px 5px 5px #141414;
 }
 
-#login-email, #signup-name, #signup-email{
+#login-email, #signup-name, #signup-email {
     border-bottom-left-radius: 0px; border-bottom-right-radius: 0px;
     border-bottom: none;
 }
 
-#login-password, #signup-email, #signup-password{
+#login-password, #signup-email, #signup-password {
     border-top-left-radius: 0px; border-top-right-radius: 0px;
 }
 
-.input-group .form-control.chzn-select{
+.input-group .form-control.chzn-select {
     width: 75%;
 }
 
-.chosen-container{
+.chosen-container {
     margin-right: 2px;
 }
 
@@ -95,3 +95,13 @@ h2 {
     padding-top:8px;
 }
 
+.panel {
+    background-color: black;
+    opacity: 0.6;
+    color: white;
+    border-color: black;
+}
+
+.glyphicon{
+    padding-right: 10px;
+}
