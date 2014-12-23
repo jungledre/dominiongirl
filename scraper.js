@@ -12,20 +12,20 @@ var createCard  = function(thisCard) {
     var cardCost = thisCard.children(".column-2").text();
     var cardCostMatch = cardCost.match(/(\d) Coin/)
 
-    db.deck.findOrCreate({where: {deckname: thisCard.children(".column-5").text()}}).then(function(deck) {
+    db.deck.findOrCreate({where: {deck_name: thisCard.children(".column-5").text()}}).then(function(deck) {
         var card = {
-        "cardName": thisCard.children(".column-1").text(),
+        "card_name": thisCard.children(".column-1").text(),
         "expansion": thisCard.children(".column-5").text(),
-        "cardType": thisCard.children(".column-3").text(),
+        "card_type": thisCard.children(".column-3").text(),
         // "img_url": thisCard.find(".column-6 a").attr('href'),
         // "text": cardDescription,
-        "deckId": deck[0].values.id,
+        "deck_id": deck[0].values.id,
         "trash": !!(cardDescription.match(/Trash/i)),
-        "plusAction": parseInt((cardDescription.match(/(\d+) Action/) || [])[1]) || 0,
-        "plusCoin": parseInt((cardDescription.match(/(\d+) Coin/) || [])[1]) || 0,
-        "plusBuy": parseInt((cardDescription.match(/(\d+) Buy/) || [])[1]) || 0,
-        "costTreasure": parseInt((cardCost.match(/(\d+)\+? Coin/) || [])[1]) || 0,
-        "costPotions": parseInt((cardCost.match(/(\d+) Potion/) || [])[1]) || 0
+        "plus_action": parseInt((cardDescription.match(/(\d+) Action/) || [])[1]) || 0,
+        "plus_coin": parseInt((cardDescription.match(/(\d+) Coin/) || [])[1]) || 0,
+        "plus_vuy": parseInt((cardDescription.match(/(\d+) Buy/) || [])[1]) || 0,
+        "cost_treasure": parseInt((cardCost.match(/(\d+)\+? Coin/) || [])[1]) || 0,
+        "cost_potions": parseInt((cardCost.match(/(\d+) Potion/) || [])[1]) || 0
         // "victory_points":
         // "treasure":
         }
@@ -42,8 +42,7 @@ request(url, function (error, response, body) {
 
     for(var i =0; i < cards.length; i++) {
         var thisCard = $(cards[i])
-        // createCard(thisCard);
-        console.log(thisCard);
+        createCard(thisCard);
 
         // console.log("wget " + thisCard.find(".column-6 a").attr('href'))
         // ADD card_type

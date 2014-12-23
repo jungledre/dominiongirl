@@ -65,7 +65,13 @@ app.get('/settings', function(req, res, next){
 app.post('/', function(req, res, next){
     req.session.settings.deckchoice = ch.sortAlpha(ch.getDecks(req.body.deckchoice));
     res.redirect('/');
-})
+});
+
+// ABOUT
+app.get('/about', function(req, res){
+    res.render('about')
+});
+
 
 // WISHLIST
 app.route('/wishlist')

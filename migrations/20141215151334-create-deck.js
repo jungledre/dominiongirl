@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      deckname: {
+      deck_name: {
         type: DataTypes.STRING
       },
       createdAt: {

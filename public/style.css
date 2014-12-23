@@ -51,9 +51,29 @@ h2 {
     padding-bottom: 30px;
 }
 
+#about {
+    text-align: center;
+}
+
 #igPhotos {
     padding: 0px;
     box-shadow: 0px 0px 0px #000;
+}
+
+#beeHive {
+    padding-top: 50px;
+    text-align: center;
+}
+
+#moarBees {
+    padding: 50px;
+    font-size: 18.0pt;
+    line-height: 125%;
+    font-family: "Courier New";
+    font-weight: bold;
+    text-decoration: underline;
+    color: rgb(255, 230, 127);
+    cursor: auto;
 }
 
 #card-display {

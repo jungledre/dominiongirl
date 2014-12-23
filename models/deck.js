@@ -2,11 +2,11 @@
 
 module.exports = function(sequelize, DataTypes) {
   var deck = sequelize.define("deck", {
-    deckname: DataTypes.STRING
+    deck_name: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.deck.hasMany(models.card)
       }
     }
   });

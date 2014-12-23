@@ -2,19 +2,19 @@
 
 module.exports = function(sequelize, DataTypes) {
   var card = sequelize.define("card", {
-    cardName: DataTypes.STRING,
-    deckId: DataTypes.INTEGER,
-    cardType: DataTypes.STRING,
+    card_name: DataTypes.STRING,
+    deck_id: DataTypes.INTEGER,
+    card_type: DataTypes.STRING,
     trash: DataTypes.BOOLEAN,
-    plusAction: DataTypes.INTEGER,
-    plusCoin: DataTypes.INTEGER,
-    plusBuy: DataTypes.INTEGER,
-    costTreasure: DataTypes.INTEGER,
-    costPotions: DataTypes.INTEGER
+    plus_action: DataTypes.INTEGER,
+    plus_coin: DataTypes.INTEGER,
+    plus_buy: DataTypes.INTEGER,
+    cost_treasure: DataTypes.INTEGER,
+    cost_potions: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.card.belongsTo(models.deck)
       }
     }
   });

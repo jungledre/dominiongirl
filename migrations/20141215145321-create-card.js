@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      cardName: {
+      card_name: {
         type: DataTypes.STRING
       },
       createdAt: {
@@ -19,28 +19,28 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE
       },
-      deckId: {
+      deck_id: {
         type: DataTypes.INTEGER
       },
-      cardType: {
+      card_type: {
         type: DataTypes.STRING
       },
       trash: {
         type: DataTypes.BOOLEAN
       },
-      plusAction: {
+      plus_action: {
         type: DataTypes.INTEGER
       },
-      plusCoin: {
+      plus_coin: {
         type: DataTypes.INTEGER
       },
-      plusBuy: {
+      plus_buy: {
         type: DataTypes.INTEGER
       },
-      costTreasure: {
+      cost_treasure: {
         type: DataTypes.INTEGER
       },
-      costPotions: {
+      cost_potions: {
         type: DataTypes.INTEGER
       },
     }).done(done);
