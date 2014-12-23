@@ -1,23 +1,18 @@
 <% include /header %>
 
-<div class="container">
+<div class="container col-md-offset-2 col-md-8">
   <form role="form" action="/wishlist" method="POST">
     <div class="form-group">
-      <textarea class="form-control" rows="3" name="text" placeholder="Share the features you'd like to see added!"></textarea>
+      <input type="text" class="form-control" name="text" placeholder="Share a feature you'd like to see added!">
     </div>
-    <button type="submit" class="btn btn-default">Post</button>
   </form>
-
   <% for (var i = 0; i < feature.length; i++) { %>
-
-<div class="panel panel-default">
-  <div class="panel-body">
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span><%= feature[i].text %>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <span class="glyphicon glyphicon-user" aria-hidden="true"></span><%= feature[i].text %>
+    </div>
   </div>
-</div>
-
   <% } %>
-
 </div>
 
 <% include /footer %>
