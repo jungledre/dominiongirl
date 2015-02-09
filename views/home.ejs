@@ -6,9 +6,9 @@
 </div>
 
 <div class="row" id="allCards">
-    <% for (var i = 0; i < deckchoice.length; i++) { %>
-        <% if (deckchoice.length != 0) {%>
-            <img src="https://s3-us-west-2.amazonaws.com/dominiongirl/card_images/<%= deckchoice[i].name.replace(/[\s-']/g,'').toLowerCase() %>.jpg" class="flipInX animated col-md-2" id="card-display">
+    <% for (var i = 0; i < deckChoice.length; i++) { %>
+        <% if (deckChoice.length != 0) {%>
+            <img src="https://s3-us-west-2.amazonaws.com/dominiongirl/card_images/<%= deckChoice[i].card_name.replace(/[\s-']/g,'').toLowerCase() %>.jpg" class="flipInX animated col-md-2" id="card-display">
         <% } %>
     <% } %>
 </div>

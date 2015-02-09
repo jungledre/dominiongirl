@@ -1,8 +1,6 @@
 var express = require('express');
-var app = express();
 var Instagram = require('instagram-node-lib');
 var deckData = require("./deck.json");
-
 var bodyParser = require('body-parser');
 var _ = require("lodash");
 var bcrypt = require('bcrypt');
@@ -12,6 +10,27 @@ var request = require('request');
 var db = require('./models');
 var ch = require('./lib/cardHelper')
 
+// var deckQueryDominion = db.sequelize.query("SELECT cards.card_name FROM cards JOIN decks ON cards.deckId = decks.id WHERE decks.deck_name = 'Dominion'").success(function(myCards) {
+//       return myCards;
+//     })
+
+// var deckQueryDominion = "Cellar"
+
+var myCards = []
+
+var deckQueryDominion = db.deck.find({where:{'deck_name':['Dominion']}}).then(function(deck){
+    db.card.findAll({limit:10,order:'random()',where:{'deckId':deck.id}}).then(function(cards){
+
+        for (var i = cards.length - 1; i >= 0; i--) {
+            myCards.push(cards[i].dataValues)
+        };
+    })
+    console.log(myCards)
+    return myCards
+});
+
+
+var app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
@@ -33,8 +52,8 @@ app.use(function(req, res, next){
         req.session.settings={};
     }
 
-    if(!req.session.settings.deckchoice){
-        req.session.settings.deckchoice = deckData.Dominion;
+    if(!req.session.settings.deckChoice){
+        req.session.settings.deckChoice = deckQueryDominion._settledValue;
     }
 
     next();
@@ -54,7 +73,9 @@ Instagram.set('client_secret', process.env.client_secret);
 
 // HOME
 app.get('/', function(req, res, next){
-    res.render('home', {deckchoice : ch.sortAlpha(ch.shuffle(req.session.settings.deckchoice,10))});
+    console.log("FFFFFFF", deckQueryDominion._settledValue[0], "FFFFFFFFFFFF")
+    console.log(deckData.Dominion[0])
+    res.render('home', {deckChoice : ch.sortAlpha(ch.shuffle(req.session.settings.deckChoice,10))});
 });
 
 // CUSTOMIZE
@@ -63,7 +84,7 @@ app.get('/settings', function(req, res, next){
 })
 
 app.post('/', function(req, res, next){
-    req.session.settings.deckchoice = ch.sortAlpha(ch.getDecks(req.body.deckchoice));
+    req.session.settings.deckChoice = ch.sortAlpha(ch.getDecks(req.body.deckChoice));
     res.redirect('/');
 });
 
@@ -90,11 +111,11 @@ app.route('/wishlist')
 // INSTAGRAM
 app.get('/photos', function(req,res) {
     Instagram.tags.recent({ name: 'beedog',
-         complete: function(data){
+        complete: function(data){
             // console.log(data[1].images.standard_resolution.url )
             res.render('photos', {data: data})
-    }
-});
+        }
+    });
 });
 
 // LOGIN FORM
@@ -157,6 +178,28 @@ app.get('/logout',function(req,res){
     res.redirect('/')
 });
 
+// HANDLE 404
+app.use(function(req, res, next){
+  res.status(404);
+  if (req.accepts('html')) {
+    res.render('404', { url: req.url });
+    return;
+  }
+  if (req.accepts('json')) {
+    res.send({ error: 'Not found' });
+    return;
+  }
+  res.type('txt').send('Not found');
+});
+
+// HANDLE 500
+app.use(function(err, req, res, next){
+  // we may use properties of the error object
+  // here and next(err) appropriately, or if
+  // we possibly recovered from the error, simply next().
+  res.status(err.status || 500);
+  res.render('500', { error: err });
+});
 
 app.listen(process.env.PORT || 3000, function(){
     console.log('DEATH RACE 3000!');

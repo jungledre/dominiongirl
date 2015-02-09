@@ -19,11 +19,11 @@ var createCard  = function(thisCard) {
         "card_type": thisCard.children(".column-3").text(),
         // "img_url": thisCard.find(".column-6 a").attr('href'),
         // "text": cardDescription,
-        "deck_id": deck[0].values.id,
+        "deckId": deck[0].values.id,
         "trash": !!(cardDescription.match(/Trash/i)),
         "plus_action": parseInt((cardDescription.match(/(\d+) Action/) || [])[1]) || 0,
         "plus_coin": parseInt((cardDescription.match(/(\d+) Coin/) || [])[1]) || 0,
-        "plus_vuy": parseInt((cardDescription.match(/(\d+) Buy/) || [])[1]) || 0,
+        "plus_buy": parseInt((cardDescription.match(/(\d+) Buy/) || [])[1]) || 0,
         "cost_treasure": parseInt((cardCost.match(/(\d+)\+? Coin/) || [])[1]) || 0,
         "cost_potions": parseInt((cardCost.match(/(\d+) Potion/) || [])[1]) || 0
         // "victory_points":
