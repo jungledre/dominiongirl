@@ -10,22 +10,20 @@ var request = require('request');
 var db = require('./models');
 var ch = require('./lib/cardHelper')
 
-// var deckQueryDominion = db.sequelize.query("SELECT cards.card_name FROM cards JOIN decks ON cards.deckId = decks.id WHERE decks.deck_name = 'Dominion'").success(function(myCards) {
-//       return myCards;
-//     })
-
-// var deckQueryDominion = "Cellar"
-
 var myCards = []
+var deckIds = []
+var deckQueryDominion = db.deck.findAll({where:{'deck_name':{in:['Dominion','Seaside']}}}).then(function(deck){
+    for (var i = deck.length - 1; i >= 0; i--) {
+            deckIds.push(deck[i].dataValues.id)
+        };
+    console.log(deckIds)
 
-var deckQueryDominion = db.deck.find({where:{'deck_name':['Dominion']}}).then(function(deck){
-    db.card.findAll({limit:10,order:'random()',where:{'deckId':deck.id}}).then(function(cards){
-
+    db.card.findAll({limit:10,order:'random()',where:{'deckId':{in:deckIds}}}).then(function(cards){
         for (var i = cards.length - 1; i >= 0; i--) {
             myCards.push(cards[i].dataValues)
         };
+        console.log(myCards)
     })
-    console.log(myCards)
     return myCards
 });
 
