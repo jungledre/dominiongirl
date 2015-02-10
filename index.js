@@ -12,21 +12,24 @@ var ch = require('./lib/cardHelper')
 
 var myCards = []
 var deckIds = []
-var deckQuery = db.deck.findAll({where:{'deck_name':{in:['Dominion']}}}).then(function(deck){
-    for (var i = deck.length - 1; i >= 0; i--) {
+
+function deckQuery(expansions, callback){
+    var deckIds = [];
+    var myCards = [];
+    db.deck.findAll({where:{'deck_name':{in:expansions}}}).then(function(deck){
+        for (var i = deck.length - 1; i >= 0; i--) {
             deckIds.push(deck[i].dataValues.id)
-        };
-    // console.log(deckIds)
+            console.log(deckIds)
 
-    db.card.findAll({limit:10,order:'random()',where:{'deckId':{in:deckIds}}}).then(function(cards){
-        for (var i = cards.length - 1; i >= 0; i--) {
-            myCards.push(cards[i].dataValues.card_name)
+            db.card.findAll({limit:10,order:'random()',where:{'deckId':{in:deckIds}}}).then(function(cards){
+                for (var i = cards.length - 1; i >= 0; i--) {
+                    myCards.push(cards[i].dataValues.card_name)
+                };
+                callback(myCards)
+            })
         };
-        // console.log(myCards)
-    })
-    return myCards
-});
-
+    });
+}
 
 var app = express();
 
@@ -51,7 +54,7 @@ app.use(function(req, res, next){
     }
 
     if(!req.session.settings.deckChoice){
-        req.session.settings.deckChoice = deckQuery._settledValue;
+        req.session.settings.deckChoice = ['Dominion'];
     }
 
     next();
@@ -72,12 +75,15 @@ Instagram.set('client_secret', process.env.client_secret);
 // HOME
 app.get('/', function(req, res, next){
     console.log("hello")
-
     // console.log("Card Name:" , deckQuery._settledValue[0])
     // console.log(deckData.Dominion[0])
-    console.log(deckQuery._settledValue)
-    console.log("https://s3-us-west-2.amazonaws.com/dominiongirl/card_images/" + deckQuery._settledValue[0].replace(/[\s-']/g,'').toLowerCase() + ".jpg")
-    res.render('home', {deckChoice : deckQuery._settledValue});
+    // console.log(deckQuery(["Dominion"])._settledValue)
+    // console.log("https://s3-us-west-2.amazonaws.com/dominiongirl/card_images/" + deckQuery._settledValue[0].replace(/[\s-']/g,'').toLowerCase() + ".jpg")
+    // res.render('home', {deckChoice : ["moat","witch"]});
+    console.log("MY CARDS", req.session.settings.deckChoice);
+    deckQuery(req.session.settings.deckChoice, function(cards) {
+        res.render('home', {deckChoice: cards})
+    })
 });
 
 // CUSTOMIZE
@@ -86,8 +92,8 @@ app.get('/settings', function(req, res, next){
 })
 
 app.post('/', function(req, res, next){
-    console.log(deckQuery)
-    req.session.settings.deckChoice = deckQuery ;
+    console.log("CARD CHOICE", req.body)
+    req.session.settings.deckChoice = req.body.deckChoice ;
     res.redirect('/');
 });
 
@@ -115,7 +121,7 @@ app.route('/wishlist')
 app.get('/photos', function(req,res) {
     Instagram.tags.recent({ name: 'beedog',
         complete: function(data){
-            // console.log(data[1].images.standard_resolution.url )
+            //console.log(data[1].images.standard_resolution.url )
             res.render('photos', {data: data})
         }
     });
