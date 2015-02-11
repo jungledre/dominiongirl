@@ -19,7 +19,7 @@ module.exports = {
         allowNull: false,
         type: DataTypes.DATE
       },
-      deck_id: {
+      deckId: {
         type: DataTypes.INTEGER
       },
       card_type: {
