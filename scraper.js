@@ -61,7 +61,7 @@ request(url, function (error, response, body) {
 
     for(var i =0; i < cards.length; i++) {
         var thisCard = $(cards[i])
-        // createCard(thisCard);
+        createCard(thisCard);
 
 
 
