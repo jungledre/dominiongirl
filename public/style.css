@@ -7,7 +7,7 @@ body {
     background: url("background-images/dark_fish_skin.png");
 }
 
-body:before {
+/*body:before {
     content: " ";
     width: 100%;
     height: 100%;
@@ -16,7 +16,7 @@ body:before {
     top: 0;
     left: 0;
     background: -webkit-linear-gradient(rgba(37, 37, 37, 0), rgba(37, 37, 37, 1));
-}
+}*/
 
 h2 {
     color: white !important;
@@ -110,9 +110,12 @@ h2 {
     padding-top:8px;
 }
 
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+    padding: 0px 5px 0px 5px;
+}
+
 .chosen-container-multi .chosen-choices li.search-choice {
-    padding-top: 7px;
-    padding-bottom: 7px;
+    padding: 0px 5px 0px 5px;
 }
 
 .chosen-container-multi .chosen-choices li.search-choice span {
