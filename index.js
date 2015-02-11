@@ -9,25 +9,32 @@ var flash = require('connect-flash');
 var request = require('request');
 var db = require('./models');
 var ch = require('./lib/cardHelper')
+var async = require('async')
 
 var myCards = []
 var deckIds = []
 
-function deckQuery(expansions, callback){
+function deckQuery(expansions, finalCallback){
     var deckIds = [];
     var myCards = [];
-    db.deck.findAll({where:{'deck_name':{in:expansions}}}).then(function(deck){
-        for (var i = deck.length - 1; i >= 0; i--) {
-            deckIds.push(deck[i].dataValues.id)
-            console.log(deckIds)
-
-            db.card.findAll({limit:10,order:'random()',where:{'deckId':{in:deckIds}}}).then(function(cards){
-                for (var i = cards.length - 1; i >= 0; i--) {
-                    myCards.push(cards[i].dataValues.card_name)
-                };
-                callback(myCards)
-            })
+    db.deck.findAll({where:{'deck_name':{in:expansions}}})
+    .then(function(decks){
+        for (var i = decks.length - 1; i >= 0; i--) {
+            deckIds.push(decks[i].dataValues.id)
         };
+        async.each(deckIds, function(deck,callback){
+         db.card.findAll({limit:10,order:'random()',where:{'deckId': deck }, 'card_type':{nlike:'Setup'}})
+         .then(function(cards){
+            for (var i = cards.length - 1; i >= 0; i--) {
+                myCards.push(cards[i].dataValues.card_name)
+            };
+            console.log("mycards", myCards);
+            callback()
+        });
+     },function(err){
+        console.log("My Cards:", myCards)
+        finalCallback(_.sample(myCards,10));
+    });
     });
 }
 
@@ -74,13 +81,6 @@ Instagram.set('client_secret', process.env.client_secret);
 
 // HOME
 app.get('/', function(req, res, next){
-    console.log("hello")
-    // console.log("Card Name:" , deckQuery._settledValue[0])
-    // console.log(deckData.Dominion[0])
-    // console.log(deckQuery(["Dominion"])._settledValue)
-    // console.log("https://s3-us-west-2.amazonaws.com/dominiongirl/card_images/" + deckQuery._settledValue[0].replace(/[\s-']/g,'').toLowerCase() + ".jpg")
-    // res.render('home', {deckChoice : ["moat","witch"]});
-    console.log("MY CARDS", req.session.settings.deckChoice);
     deckQuery(req.session.settings.deckChoice, function(cards) {
         res.render('home', {deckChoice: cards})
     })
@@ -92,7 +92,7 @@ app.get('/settings', function(req, res, next){
 })
 
 app.post('/', function(req, res, next){
-    console.log("CARD CHOICE", req.body)
+    console.log("DECK CHOICE", req.body)
     req.session.settings.deckChoice = req.body.deckChoice ;
     res.redirect('/');
 });

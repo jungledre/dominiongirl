@@ -34,6 +34,25 @@ var createCard  = function(thisCard) {
     });
 };
 
+var updateCard = function() {
+    db.card.find({where: {card_name:{in:["Platinum", "Potion", "Colony"]}}}).on('success', function(card){
+        if (card) {
+            card.updateAttributes({
+                card_type: "Setup"
+            }).success(function(){})
+    }}
+)}
+
+// Project.find({ where: {title: 'aProject'} }).on('success', function(project) {
+//   if (project) { // if the record exists in the db
+//     project.updateAttributes({
+//       title: 'a very different title now'
+//     }).success(function() {});
+//   }
+// })
+
+updateCard()
+
 request(url, function (error, response, body) {
   if (!error && response.statusCode == 200) {
     // console.log(body) // Print the google web page.
@@ -42,7 +61,9 @@ request(url, function (error, response, body) {
 
     for(var i =0; i < cards.length; i++) {
         var thisCard = $(cards[i])
-        createCard(thisCard);
+        // createCard(thisCard);
+
+
 
         // console.log("wget " + thisCard.find(".column-6 a").attr('href'))
         // ADD card_type
