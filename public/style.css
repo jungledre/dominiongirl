@@ -47,8 +47,18 @@ h2 {
     text-shadow: -2px 3px 3px #141414;
 }
 
+.card-display {
+    margin: 15px;
+    padding: 7px;
+    background-color: black;
+    border-radius: 5px;
+    box-shadow: -4px 5px 5px #141414;
+    text-align: center;
+}
+
 #allCards {
     padding-bottom: 30px;
+    text-align: center;
 }
 
 #about {
@@ -74,14 +84,6 @@ h2 {
     text-decoration: underline;
     color: rgb(255, 230, 127);
     cursor: auto;
-}
-
-#card-display {
-    margin: 19px;
-    padding: 7px;
-    background-color: black;
-    border-radius: 5px;
-    box-shadow: -4px 5px 5px #141414;
 }
 
 #login-email, #signup-name, #signup-email {
@@ -115,7 +117,7 @@ h2 {
 }
 
 .chosen-container-multi .chosen-choices li.search-choice {
-    padding: 0px 5px 0px 5px;
+    padding: 6px 20px 6px 5px;
 }
 
 .chosen-container-multi .chosen-choices li.search-choice span {

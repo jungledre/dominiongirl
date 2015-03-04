@@ -5,10 +5,11 @@
     <a href="/settings"><button type="button" class="btn btn-default" href="#">Settings</button></a>
 </div>
 
-<div class="row" id="allCards">
+<div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 center-block" id="allCards">
     <% for (var i = 0; i < deckChoice.length; i++) { %>
         <% if (deckChoice.length != 0) {%>
-            <img src="https://s3-us-west-2.amazonaws.com/dominiongirl/card_images/<%= deckChoice[i].replace(/[\s-'\u0092]/g,"").toLowerCase() %>.jpg" class="flipInX animated col-md-2" id="card-display">
+            <img src="https://s3-us-west-2.amazonaws.com/dominiongirl/card_images/<%= deckChoice[i].replace(/[\s-'\u0092]/g,"").toLowerCase() %>.jpg"
+                 class="flipInX animated col-md-2 card-display">
         <% } %>
     <% } %>
 </div>
