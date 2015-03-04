@@ -1,4 +1,3 @@
-// require('newrelic');
 var express = require('express');
 var Instagram = require('instagram-node-lib');
 var deckData = require("./deck.json");
